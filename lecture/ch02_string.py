@@ -63,3 +63,5 @@ id = "cherry1004@gmail.com"
 #     www.google.com
 #     www.daum.net
 # naver, google, daum을 추출하는 코드 (1가지)
+print(id.find("cherry1004"))
+
