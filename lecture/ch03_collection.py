@@ -142,7 +142,7 @@ print(list_f)
 print(list(set(list_f)))
 
 a = {}  # dict
-.print(type(a))
+print(type(a))
 
 # 숙제 : a변수와 b변수의 값을 교환
 a = 10

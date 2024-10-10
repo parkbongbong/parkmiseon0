@@ -30,3 +30,11 @@ for i, val in enumerate(a):
 
 for i in range(1,10):
     print(f"2 X {i} = {2*i}")
+    
+# 숙제
+# 중첩 for문 사용해서 구구단 2단 부터 9단까지 출력하는 코드 작성
+# 2~9단 반복 1
+# 단(1~9)곱셈 반복 2
+# for i in 범위:
+    # for j in 범위:
+        # for k in 범위:
