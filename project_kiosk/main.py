@@ -93,7 +93,32 @@ while True:
      # if 주문
      # else:
      
+    print(">> MSG: 추가 주문하시겠습니까?")
+    while True: 
+        yn = input("y/n: ").lower()
+        if yn =="y":
+            break
+        elif yn =="n":
+            break
+        else:
+            print(">> WARNING: 올바른 값을 입력하세요")
+            
+    if yn == "y":
+        continue
+    elif yn == "n":
+        # 주문내역을 출력
+        print("*"*50)
+        print(f"== 주문 메뉴 ==")
+        # order_list = [[이름, 가격],[이름, 가격]...]
+        total = 0
+        for i,item in enumerate(order_list):  # item = [이름, 가격]
+            print(f"{i+1}.{item[0]}({item[1]}원)")
+            total += item[1]
+        print(f"고객님이 주문하신 메뉴는 총 {len(order_list)}건으로 ")
+        print(f"결제금액은 {total}원 입니다.")
+        print(f"이용해주셔서 감사합니다.")
+     
     
      # 사용자가 주문한 메뉴 출력   
-    for item in order_list:
-        print(item)
+    # for item in order_list:
+    #     print(item)
