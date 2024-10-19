@@ -63,7 +63,7 @@ print(float(d))
 
 # 6. 명명규칙(naming rule)
 # - 변수,함수,클래스 등의 사용자 정의 이름에 사용
-# - 몀확하고 알아보기 쉽게
+# - 명확하고 알아보기 쉽게
 #  1. 영어 대소문자,숫자,특수문자(_,-)만 사용
 #  2. 숫자로 시작할 수 없습니다
 #     123abc(x) abc123(o)
@@ -78,7 +78,7 @@ print(float(d))
 # - 변수,함수,클랫, 등의 사용자 정의 이름에 사용하는 기법
 # - 프로그래밍 언어별로 naming mehtod가 다름
 # 1)PascalCase (StudentNumber)
-# 2)camlCase   (studentNumber)
+# 2)camelCase   (studentNumber)
 # 3)snake_case  (student_number)
 # 4)kebab-case  (student-number)
 
