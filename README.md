@@ -37,14 +37,46 @@
 github 계정 생성
 
 ## 2. 데이터베이스
- - 데이터를 효율적으로 저장하고 관리할 수 있는 프로그램(DBMS)
+- 데이터를 효율적으로 저장하고 관리할 수 있는 프로그램(DBMS)
 
 ### 2-1. DBMS(데이터베이스 관리 시스템)
 - 관계형 데이터베이스(RDB) : 표 형태, 보안이 중요하거나 영속성 데이터(개인정보, 금융정보, ...)
    -> MariaDB, Oracle, MySQL, PostgreSQL
 - NoSQL : 자유 형태, 대용량 수집 데이터
    -> MongoDB
-   
+
+### 2-2. SQL(구조질의어)
+- DBMS에게 명령을 내릴 때 사용
+- 예) SELECT * FROM tbl_user;
+
+### 2-3. DBMS 설치 방법
+1. 로컬 설치(설치파일 다운로드 직접 설치)
+2. 클라우드(AWS, GCP, Azure, 기타등등)
+3. 도커 컨테이너
+
+## 3. 도커(컨테이너)
+- 도커: 컨테이너 가상화기술을 구현해주는 프로그램
+- 도커 -> 도커엔진 + 도커 이미지
+- 도커 이미지 : 도커 컨테이너 실행을 위한 설계 도면
+- 도커 엔진 : 도커 이미지를 바탕으로 컨테이너를 실행
+
+### 3-1. 도커 명령어
+- docker ps      # 현재 실행중인 컨테이너 확인
+- docker images  # 현재 보유하고 있는 컨테이너 이미지 확인
+- docker run     # 도커 컨테이너 실행
+- docker logs [컨테이너 이름]  # 해당 컨테이너 로그 확인
+- docker exec -it [컨테이너 이름] /bin/bash  # 해당 컨테이너 접속
+...
+
+>> docker run --name mariadb -d -p 3306:3306 -e MARIADB_ROOT_PASSWORD=mariadb mariadb
+- --name mariadb   # 컨테이너 이름 
+- -d               # 데몬(백그라운드 실행)
+- -p 3306:3306     # 포트(외부:내부) -> 외부 포트(호스트), 내부 포트(컨테이너)
+- -e MYSQL_ROOT_PASSWORD=mariadb mariadb  # 환경설정(ROOT암호=mariadb)
+- mariadb          # mariadb 컨테이너 실행! -> mariadb 이미지 필요!
+...
+
+
 ## 99. 전체 시스템 구조(학습용) - WEB/APP
 # -Client - Server
 # *Client(고객 : 웹 브라우저)
