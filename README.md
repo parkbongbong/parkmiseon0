@@ -54,6 +54,17 @@ github 계정 생성
 2. 클라우드(AWS, GCP, Azure, 기타등등)
 3. 도커 컨테이너
 
+### 2-4. 데이터베이스 구조
+ 1. DBMS -> MariaDB, Oracle, MySQL, PostgreSQL
+ 2. ㄴ Database -> chosun
+ 3.      ㄴ Table -> tbl_news  (SQL)
+ - 프로젝트별로 Database 생성
+ - Database(쇼핑몰)
+ -    ㄴ Table(회원)
+ -    ㄴ Table(상품)
+ -    ㄴ Table(구매)
+ -    ㄴ Table(고객문의)
+
 ## 3. 도커(컨테이너)
 - 도커: 컨테이너 가상화기술을 구현해주는 프로그램
 - 도커 -> 도커엔진 + 도커 이미지
