@@ -15,7 +15,7 @@ def connection():
             user = "root",
             password = "mariadb",
             database = "chosun",
-            charset = "uf8",
+            charset = "utf8",
             autocommit=True,
             cursorclass=pymysql.cursors.DictCursor
         )

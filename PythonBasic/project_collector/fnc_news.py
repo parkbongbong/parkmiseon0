@@ -17,8 +17,8 @@ def collect_news(category:str):
             break
         
         print(f"{page}■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
-        for link in link_list:
-            print(f"{count} ========================================")
+        for link in (link_list):
+            print(f"{count} ==================================================================")
             get_news_info(link["href"])
             count += 1
         page += 1
@@ -39,7 +39,7 @@ def get_news_info(url: str):
     else:
         writer = writer_list[0].get_text()
         
-    writer = doc.select("span.txt_info")[0].get_text()
+    # writer = doc.select("span.txt_info")[0].get_text()
     reg_date = doc.select("span.num_date")[0].get_text()
     split_list =  reg_date.split(".")
     split_date = list(map(lambda x: x.strip(), split_list))
