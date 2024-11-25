@@ -16,6 +16,13 @@ import time
 options = Options()
 # - SELENIUM 동작 후 웹브라우저 종료(Default) -> 끄기
 options.add_experimental_option("detach",True)  # 배포시 제거할것!
+# options.add_argument("headless")  # 백그라운드 동작(웹브라우저 켜기X)
+
+# 로봇 아닌 사람인척 만들어주기
+options.add_argument("disable-blink-features=AutomationControlled")
+options.add_experimental_option("useAutomationExtension",False)
+options.add_experimental_option("excludeSwitches",["enable-automation"])
+
 
 # 2. Selenium이 제어하는 Chrome 웹 브라우저 설치
 # - 오류1: 사용하고 있는 Chrome 웹브라우저의 버전을 최신 업데이트
