@@ -1,21 +1,54 @@
-import requests
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import time
 from bs4 import BeautifulSoup
 from collect_dao import insert_news
+import requests
+
+
+options = Options()
+options.add_experimental_option("detach",True)  
+options.add_argument("disable-blink-features=AutomationControlled")
+options.add_experimental_option("useAutomationExtension",False)
+options.add_experimental_option("excludeSwitches",["enable-automation"])
+
+
 
 def collect_news():
-    count = 1 
-    url = "https://news.daum.net/home"
-            
-    result = requests.get(url)
-    doc = BeautifulSoup(result.text,"html.parser")
+    
+    driver = webdriver.Chrome(options=options)
+    url = "https://news.daum.net/home" 
+    driver.get(url)
+    time.sleep(1)
 
-    link_list = doc.select("ul.list_newsbasic a.item_newsbasic")
-    print(link_list)
+    count = 0
+    result = driver.page_source  # 현재 페이지 소스코드 GET
+    
+    for i in range(2):
+        doc = BeautifulSoup(result,"html.parser")
         
-    for link in (link_list):
-        print(f"{count} ==================================================================")
-        get_news_info(link["href"])
-        count += 1
+        # link_list -> 현재 페이지의 수집할 기사 링크(9개)
+        # - 현재 페이지 수집 완료! -> link 목록을 저장!
+        
+        # if 현재 link가 link목록에 있는지 물어보기
+        # -> 있으면: 중복, 수집 멈춤
+        # -> 없으면: 수집!
+
+        link_list = doc.select("article.content-article ul.list_newsheadline2 a.item_newsheadline2")
+        print(link_list)
+            
+        for link in (link_list):
+            print(f"{count} ==================================================================")
+            get_news_info(link["href"])
+            count += 1
+            # 다음 뉴스 버튼 클릭 이벤트
+        driver.find_element(By.XPATH,'//*[@id="58d84141-b8dd-413c-9500-447b39ec29b9"]/div[2]/a').click()
+        time.sleep(1)
+        result = driver.page_source
+            
    
         
 
@@ -55,4 +88,6 @@ def get_news_info(url: str):
         "regdate":reg_date
     }
     
-    insert_news(data)
+    # insert_news(data)
+    
+collect_news()
