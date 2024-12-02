@@ -1,4 +1,8 @@
 # 다음 뉴스 수집기
+# STREAMLIT(웹사이트) -> 수집(실시간 뉴스) -> DB에 저장
+#                                        -> CSV 저장
+#                                        -> 웹페이지 데이터 시각화
+
 
 # 웹사이트 
 #     - 화면 : 뉴스 카테고리를 선택(streamlit)
@@ -8,12 +12,17 @@
 
 import streamlit as st
 from fnc_news import collect_news
+import re  # 정규식
 
 # README.md -> md(Markdown) 문서
 #   ㄴ emoji(아이콘) -> https://snskeyboard.com/emoji/
 # Streamlit Doc -> https://docs.streamlit.io/
 
 # streamlit run project_collector/main.py
+
+# "Pandas"의 DataFrame -> CSV로 변경
+def convert_df(df):
+    return df.to_csv(index=False, encoding="utf8")
 
 category = "digital"
 def main():
@@ -24,34 +33,31 @@ def main():
     st.title("NEWS: :blue[Collector]")
     st.text("DAUM 뉴스를 수집합니다.")
     
-    category = {
-        "사회": "society",
-        "정치": "politics",
-        "경제": "economic",
-        "국제": "foreign",
-        "문화": "culture",
-        "IT": "digital"
-    }
-    with st.expander(label="뉴스 카테고리",expanded=False):
-        for key, value in category.items():
-            st.text(f"{key}({value})")
-    
-    with st.form(key="form"):
+   
         # 1. 정규식 -> 문자만 추출(숫자, 특수문자 제거!)
         # 2. 수집 데이터를 엑셀로 다운로드
         # 3. README.md 작성! -> 프로젝트 정리(Github)
-        sel_category = st.text_input(label="수집하고 싶은 뉴스 카테고리").strip()
-        st.write(sel_category)
-        st.form_submit_button("수집")
-    
-    
-    
-    
-    
-    
-    
-    # print(">> 뉴스를 수집합니다")
-    # collect_news(category)
+        
+        
+        # 사용자가 수집버튼을 클릭하면 -> 클릭 이벤트
+    flag = False
+    if st.button("수집"):
+        df_news, count = collect_news()
+        st.write(f"뉴스 {count}건 수집 완료")
+        st.write(df_news)
+        flag = True
+        news_csv = convert_df(df_news)
+        
+    # 수집 성공한 경우 엑셀 다운로드 버튼 활성화!
+    if flag:
+        st.download_button(
+            label="다운로드",
+            data=news_csv,
+            file_name=f"실시간뉴스.csv",
+            mime="text/csv",
+            key="download_csv"
+        )
+           
     
 if __name__ == "__main__":
     main()
