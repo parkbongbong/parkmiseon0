@@ -92,11 +92,51 @@ def search_books(keyword: str):
 
 # 도서등록
 def insert_book(book: dict):
-    pass
+    conn = connection()
+    
+    try:
+        curs = conn.cursor()
+        sql = """
+            INSERT INTO tbl_book(book_name, book_writer, book_publisher, book_price) 
+            VALUES(%(book_name)s, %(book_writer)s, %(book_publisher)s, %(book_price)s);
+        """
+        curs.execute(sql, book)
+    except Exception as e:
+        print(e)
+        
+    finally:
+        if curs:
+            curs.close()
+        if conn and conn.open:
+            conn.close()
 
+# ※ UPDATE문과 DELETE문은 반드시 WHERE절과 함께 사용할 것!!!!!
 # 도서수정
 def update_book(book: dict):
-    pass
+    conn = connection()
+    
+    try:
+        curs = conn.cursor()
+        sql = """
+            UPDATE tbl_book
+            SET book_name = %(book_name)s,
+                book_writer = %(book_writer)s,
+                book_publisher = %(book_publisher)s,
+                book_price = %(book_price)s,
+                register_at = %(register_at)s,
+                useyn = %(useyn)s
+            WHERE book_isbn = %(book_isbn)s;
+            
+        """
+        curs.execute(sql, book)
+    except Exception as e:
+        print(e)
+        
+    finally:
+        if curs:
+            curs.close()
+        if conn and conn.open:
+            conn.close()
 
 # 도서삭제
 def delete_book(book_isbn: dict):
